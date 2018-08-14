@@ -1,1 +1,21 @@
-Hello world
+<h2>Hello <%= current_user(session).name %>!</h2>
+
+<!--
+<h4>What have you learned today?</h4>
+-->
+<div class="nugget-input">
+  <form action="/nuggets" method="post">
+    <div class="form-group">
+      <textarea name="content" class="form-control" placeholder="What have you learned today?" autofocus></textarea>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+</div>
+
+<div class="nugget-list">
+  <ul>
+  <% Nugget.all.each do |nugget| %>
+    <li><%= nugget.content %>
+  <% end %>
+  </ul>
+</div>

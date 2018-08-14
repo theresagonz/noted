@@ -18,17 +18,24 @@ class UsersController < ApplicationController
       new_user.save
       # save user's info in session
       session[id: new_user.id]
-      # redirect to
+      # redirect to user's home page
       redirect to '/index'
     else
       flash[:error] = new_user.errors.full_messages.uniq
       redirect to '/signup'
     end
-
   end
 
   post '/login' do
+    user = User.find_by(username: params[:username])
 
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to '/index'
+    else
+      flash[:error] = "Username and/or password is incorrect"
+      redirect to '/'
+    end
   end
 
 end
