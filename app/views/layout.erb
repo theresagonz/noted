@@ -20,7 +20,15 @@
   <body>
     <div class="wrapper">
 
-        <%= yield %>
+      <% if !!flash[:error] %>
+      <% binding.pry %>
+      <div id="flash-error">
+        <% flash[:error].each do |error| %>
+          <%= error %><br>
+        <% end %>
+      </div>
+      <% end %>
+      <%= yield %>
 
       <footer class="branding">
         <small>&copy; 2018 <strong>One Day Wiser</strong></small>
