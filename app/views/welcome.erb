@@ -1,14 +1,29 @@
 <div class="container">
-  <header></header>
-  <div class="col-md-8 col-md-offset-2">
-    <h2>Sinatra Template Default Page</h2>
+  
+  <h2>Welcome to One Day Wiser!</h2>
 
-    <div class="content">
-      <p>Welcome to One Day Wiser!</p>
-    </div>
+  <p>We learn something new every day -- don't let it slip away. Recognize the beauty in today, kindle new ideas, and get wiser!</p>
+  
+  <div class="sidebar">
 
-    <div class="sidebar">
-    </div>
+    <form action="/login" method="post">
+
+      <div class="form-group">
+        <label for="welcome-username">Username:</label><br>
+        <input type="email" id="welcome-username" name="username" class="form-control" autofocus>
+      </div>
+
+      <div class="form-group">
+        <label for="welcome-password">Password:</label><br>
+        <input type="password" id="welcome-password" name="password" class="form-control">
+      </div>
+
+      <input type="submit" class="btn btn-primary" value="Sign In">
+
+    </form>
+
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="/signup">New around here? Sign up</a>
 
   </div>
 </div>
