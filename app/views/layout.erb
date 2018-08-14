@@ -20,14 +20,20 @@
   <body>
     <div class="wrapper">
 
-      <% if !!flash[:error] %>
-      <% binding.pry %>
+      <% if flash[:error].is_a?(Array) && !!flash[:error] %>
       <div id="flash-error">
         <% flash[:error].each do |error| %>
           <%= error %><br>
         <% end %>
       </div>
       <% end %>
+
+      <% if flash[:error].is_a?(String) && !!flash[:error] %>
+      <div id="flash-error">
+        <%= flash[:error] %>
+      </div>
+      <% end %>
+
       <%= yield %>
 
       <footer class="branding">
