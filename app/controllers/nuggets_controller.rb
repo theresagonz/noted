@@ -1,0 +1,3 @@
+class NuggetsController < ApplicationController
+
+end
