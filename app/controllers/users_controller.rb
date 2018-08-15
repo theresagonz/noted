@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       # save new user to db
       new_user.save
       # save user's info in session
-      session[id: new_user.id]
+      session[:user_id] = new_user.id
       # redirect to user's home page
       redirect to '/index'
     else
@@ -38,6 +38,11 @@ class UsersController < ApplicationController
       flash[:error] = "Username and/or password is incorrect"
       redirect to '/'
     end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/'
   end
 
 end
