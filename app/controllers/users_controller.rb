@@ -9,11 +9,29 @@ class UsersController < ApplicationController
     redirect_if_not_logged_in(session)
     @my_notes = Note.where(user_id: current_user(session).id)
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
-    erb :'notes/index'
+    erb :'users/index'
   end
 
-  get '/notes/new' do
-    erb :'notes/new'
+  # since I only want user to have access to own info, not using any /users routes
+  get '/edit' do
+    redirect_if_not_logged_in(session)
+    @user = current_user(session)
+    erb :'users/edit'
+  end
+
+  patch '/edit' do
+    user = current_user(session)
+    user.name = params[:name]
+    user.username = params[:username]
+    binding.pry
+    if user.save
+      user.save
+      flash[:message] = "Profile changes saved"
+      redirect to '/index'
+    else
+      flash[:error] = user.errors.full_messages.uniq
+      redirect to 'edit'
+    end
   end
 
   post '/signup' do

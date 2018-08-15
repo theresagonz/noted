@@ -6,6 +6,10 @@ class NotesController < ApplicationController
     redirect to 'index'
   end
 
+  get '/notes/new' do
+    erb :'notes/new'
+  end
+
   get '/notes/:id' do
     @note = Note.find_by(id: params[:id])
     erb :'notes/show'

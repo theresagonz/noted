@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   validates :username,  presence: true,
                         uniqueness: true
   validates :password,  presence: true,
-                        confirmation: true
-  validates :password_confirmation, presence: true
+                        confirmation: true,
+                        length: { minimum: 1 },
+                        allow_nil: true
+  validates :password_confirmation,
+                        presence: true,
+                        allow_nil: true
 end

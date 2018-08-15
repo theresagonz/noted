@@ -7,7 +7,7 @@
     <input type="hidden" id="hidden" name="_method" value="patch">
       
     <div class="form-group">
-      <textarea name="content" class="form-control" autofocus onfocus="this.value = this.value;"> <%= @note.content %> </textarea>
+      <textarea name="content" class="form-control" autofocus onfocus="this.value = this.value;"><%= @note.content %></textarea>
     </div>
     <input type="radio" name="public" value="0" 
     <%= "checked" if @note.public == 0 %>>Private<br>
