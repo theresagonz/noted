@@ -1,12 +1,9 @@
 <h2>Hello <%= current_user(session).name %>!</h2>
 
-<!--
-<h4>What have you learned today?</h4>
--->
 <br>
 
-<div class="nugget-input">
-  <form action="/nuggets" method="post">
+<div class="note-input">
+  <form action="/notes" method="post">
     <div class="form-group">
       <textarea name="content" class="form-control" placeholder="What have you learned today?" autofocus></textarea>
     </div>
@@ -17,21 +14,23 @@
 </div>
 
 <br>
+
+<br>
 <h4>Things I've Learned</h4>
-<div class="nugget-list">
+<div class="note-list">
   <ul>
-  <% @my_nuggets.each do |nugget| %>
-    <li><a href="/nuggets/<%= nugget.id %>"> <%= nugget.content %> </a>
+  <% @my_notes.each do |note| %>
+    <li> <%= note.created_at %> <a href="/notes/<%= note.id %>"> <%= note.content %> </a>
   <% end %>
   </ul>
 </div>
 
 <br>
 <h4>Things Other People Have Learned</h4>
-<div class="nugget-list">
+<div class="note-list">
   <ul>
-  <% @public_nuggets.each do |nugget| %>
-    <li> <%= nugget.content %>
+  <% @public_notes.each do |note| %>
+    <li> <%= note.content %>
   <% end %>
   </ul>
 </div>

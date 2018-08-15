@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :nuggets
-  has_many :tags, through: :nuggets
+  has_many :notes
+  has_many :tags, through: :notes
   has_secure_password
 
   validates :name,      presence: true

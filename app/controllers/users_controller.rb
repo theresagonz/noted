@@ -7,9 +7,9 @@ class UsersController < ApplicationController
 
   get '/index' do
     redirect_if_not_logged_in(session)
-    @my_nuggets = Nugget.where(user_id: current_user(session).id)
-    @public_nuggets = Nugget.where("user_id != ? AND public = ?", current_user(session).id, '1')
-    erb :'nuggets/index'
+    @my_notes = Note.where(user_id: current_user(session).id)
+    @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
+    erb :'notes/index'
   end
 
   post '/signup' do

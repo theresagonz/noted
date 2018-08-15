@@ -8,5 +8,5 @@ end
 
 use Rack::MethodOverride
 use UsersController
-use NuggetsController
+use NotesController
 run ApplicationController

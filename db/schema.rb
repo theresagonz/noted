@@ -13,17 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20180814161205) do
 
-  create_table "nuggets", force: :cascade do |t|
+  create_table "note_tags", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "note_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
     t.string   "user_id"
     t.string   "content"
     t.integer  "public"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "tag_nuggets", force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "nugget_id"
   end
 
   create_table "tags", force: :cascade do |t|

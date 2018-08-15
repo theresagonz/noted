@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "secret"
     register Sinatra::Flash
+    # config.active_record.default_timezone = :local
   end
 
   get "/" do

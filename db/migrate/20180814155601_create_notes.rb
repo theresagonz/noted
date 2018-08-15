@@ -1,6 +1,6 @@
-class CreateNuggets < ActiveRecord::Migration
+class CreateNotes < ActiveRecord::Migration
   def change
-    create_table :nuggets do |t|
+    create_table :notes do |t|
       t.string :user_id
       t.string :content
       t.integer :public
