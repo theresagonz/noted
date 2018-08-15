@@ -1,0 +1,14 @@
+<h2>Hello <%= current_user(session).name %>!</h2>
+
+<br>
+
+<div class="note-input">
+  <form action="/notes" method="post">
+    <div class="form-group">
+      <textarea name="content" class="form-control" placeholder="What have you learned today?" autofocus></textarea>
+    </div>
+    <input type="radio" name="public" value="0">Private<br>
+    <input type="radio" name="public" value="1">Public<br>
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+</div>

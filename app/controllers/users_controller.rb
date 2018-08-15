@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     erb :'notes/index'
   end
 
+  get '/notes/new' do
+    erb :'notes/new'
+  end
+
   post '/signup' do
     new_user = User.new(params)
     # if signup info is valid
@@ -21,7 +25,7 @@ class UsersController < ApplicationController
       # save user's info in session
       session[:user_id] = new_user.id
       # redirect to user's home page
-      redirect to '/index'
+      redirect to '/notes/new'
     else
       flash[:error] = new_user.errors.full_messages.uniq
       redirect to '/signup'
@@ -33,7 +37,7 @@ class UsersController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/index'
+      redirect to '/notes/new'
     else
       flash[:error] = "Username and/or password is incorrect"
       redirect to '/'

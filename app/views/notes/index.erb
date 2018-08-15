@@ -2,25 +2,11 @@
 
 <br>
 
-<div class="note-input">
-  <form action="/notes" method="post">
-    <div class="form-group">
-      <textarea name="content" class="form-control" placeholder="What have you learned today?" autofocus></textarea>
-    </div>
-    <input type="radio" name="public" value="0">Private<br>
-    <input type="radio" name="public" value="1">Public<br>
-    <input type="submit" class="btn btn-primary" value="Submit">
-  </form>
-</div>
-
-<br>
-
-<br>
 <h4>Things I've Learned</h4>
 <div class="note-list">
   <ul>
   <% @my_notes.each do |note| %>
-    <li> <%= note.created_at %> <a href="/notes/<%= note.id %>"> <%= note.content %> </a>
+    <li> <%= note.created_at.strftime("%A, %B %d, %Y") %>: <a href="/notes/<%= note.id %>"> <%= note.content %> </a>
   <% end %>
   </ul>
 </div>

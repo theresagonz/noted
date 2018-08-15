@@ -9,3 +9,5 @@ ActiveRecord::Base.establish_connection(
 )
 
 require_all 'app'
+
+# config.active_record.default_timezone = :local
