@@ -3,18 +3,34 @@
 <!--
 <h4>What have you learned today?</h4>
 -->
+<br>
+
 <div class="nugget-input">
   <form action="/nuggets" method="post">
     <div class="form-group">
       <textarea name="content" class="form-control" placeholder="What have you learned today?" autofocus></textarea>
     </div>
+    <input type="radio" name="public" value="0">Private<br>
+    <input type="radio" name="public" value="1">Public<br>
     <input type="submit" class="btn btn-primary" value="Submit">
   </form>
 </div>
 
+<br>
+<h4>Things I've Learned</h4>
 <div class="nugget-list">
   <ul>
-  <% Nugget.all.each do |nugget| %>
+  <% @my_nuggets.each do |nugget| %>
+    <li><%= nugget.content %>
+  <% end %>
+  </ul>
+</div>
+
+<br>
+<h4>Things Other People Have Learned</h4>
+<div class="nugget-list">
+  <ul>
+  <% @public_nuggets.each do |nugget| %>
     <li><%= nugget.content %>
   <% end %>
   </ul>
