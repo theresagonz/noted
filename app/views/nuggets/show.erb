@@ -6,12 +6,13 @@
 
 <br></br>
 
-Public: <%= @nugget.public == 0 ? 'No' : 'Yes' %>
+<%= @nugget.public == 0 ? 'Private' : 'Public' %>
 
 <br>
 
-<a class="btn btn-dark" href="/nuggets/:id/edit" role="button">Edit</a>
-<form action="/nuggets/:id" method="post">
-  <input type="hidden" id="hidden" name="_method" value="delete">
+<a class="btn btn-dark" href="/nuggets/<%= @nugget.id %>/edit" role="button"> Edit </a>
+
+<form action="/nuggets/<%= @nugget.id %>" method="POST" onsubmit="confirm('Are you sure you want to delete the thing you learned?')">
+  <input type="hidden" name="_method" value="DELETE">
   <input class="btn btn-danger" type="submit" value="Delete">
 </form>
