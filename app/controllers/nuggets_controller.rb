@@ -7,4 +7,9 @@ class NuggetsController < ApplicationController
     redirect to 'index'
   end
 
+  get '/nuggets/:id' do
+    @nugget = Nugget.find_by(id: params[:id])
+    erb :'nuggets/show'
+  end
+
 end

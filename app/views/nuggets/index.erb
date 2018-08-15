@@ -21,7 +21,7 @@
 <div class="nugget-list">
   <ul>
   <% @my_nuggets.each do |nugget| %>
-    <li><%= nugget.content %>
+    <li><a href="/nuggets/<%= nugget.id %>"> <%= nugget.content %> </a>
   <% end %>
   </ul>
 </div>
@@ -31,7 +31,7 @@
 <div class="nugget-list">
   <ul>
   <% @public_nuggets.each do |nugget| %>
-    <li><%= nugget.content %>
+    <li> <%= nugget.content %>
   <% end %>
   </ul>
 </div>

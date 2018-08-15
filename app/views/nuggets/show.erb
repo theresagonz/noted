@@ -1,0 +1,17 @@
+<h2>Thing You Learned</h2>
+
+<br>
+
+<%= @nugget.content %>
+
+<br></br>
+
+Public: <%= @nugget.public == 0 ? 'No' : 'Yes' %>
+
+<br>
+
+<a class="btn btn-dark" href="/nuggets/:id/edit" role="button">Edit</a>
+<form action="/nuggets/:id" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input class="btn btn-danger" type="submit" value="Delete">
+</form>
