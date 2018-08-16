@@ -1,4 +1,4 @@
-<h2>Edit the thing you learned</h2>
+<h2>Edit note from <%= @note.created_at.to_date.strftime("%B %d, %Y") %></h2>
 
 <br>
 
@@ -9,7 +9,7 @@
     <div class="form-group">
       <textarea name="content" class="form-control" autofocus onfocus="this.value = this.value;"><%= @note.content %> </textarea>
     </div>
-    <label for="tags">Tags (optional)</label><br>
+    <label for="tags">Tags separated by commas (optional)</label><br>
     <input type="text" id="tags" name="tags" value="<%= @tags %>">
     <br></br>
     <input type="radio" name="public" value="0" 

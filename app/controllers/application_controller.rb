@@ -42,9 +42,17 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def redirect_to_index_if_unauthorized(session)
+    def redirect_to_index_if_unauthorized_to_view(session)
       # if the note is private and the user is not the note's creator, redirect to /index
       if @note.public == 0 && @note.user != current_user(session)
+        flash[:error] = "Hey, that's not your note"
+        redirect to '/index'
+      end
+    end
+
+    def redirect_to_index_if_unauthorized_to_edit(session)
+      # if the note is private and the user is not the note's creator, redirect to /index
+      if @note.user != current_user(session)
         flash[:error] = "Hey, that's not your note"
         redirect to '/index'
       end
