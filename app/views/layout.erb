@@ -34,6 +34,12 @@
       </div>
       <% end %>
 
+      <% if !!flash[:message] %>
+      <div id="flash-message">
+        <%= flash[:message] %>
+      </div>
+      <% end %>
+
       <%= yield %>
 
       <form action="/logout" method="post">

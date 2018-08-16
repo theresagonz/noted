@@ -2,15 +2,23 @@
 
 <br>
 
-<%= @note.content %>
-
-<br></br>
-
-<%= @note.public == 0 ? 'Private' : 'Public' %>
+<h3><%= @note.content %></h3>
 
 <br>
 
-<a class="btn btn-dark" href="/notes/<%= @note.id %>/edit" role="button"> Edit </a>
+<h4>Tags:</h4>
+<ul>
+<% @note.tags.each do |tag| %>
+  <li><%= tag.word %></li>
+<% end %>
+
+</br>
+
+This note is <%= @note.public == 0 ? 'private' : 'public' %>
+
+<br>
+
+<a class="btn btn-dark" href="/notes/<%= @note.id %>/edit" role="button">   Edit  </a>
 
 <form action="/notes/<%= @note.id %>" method="POST" onsubmit="confirm('Are you sure you want to delete the thing you learned?')">
   <input type="hidden" name="_method" value="DELETE">

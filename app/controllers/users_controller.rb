@@ -23,7 +23,6 @@ class UsersController < ApplicationController
     user = current_user(session)
     user.name = params[:name]
     user.username = params[:username]
-    binding.pry
     if user.save
       user.save
       flash[:message] = "Profile changes saved"
