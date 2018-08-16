@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    redirect_to_index_if_logged_in(session)
+    redirect_to_new_note_or_index_if_logged_in(session)
     erb :welcome
   end
 
@@ -30,9 +30,15 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def redirect_to_index_if_logged_in(session)
+    def redirect_to_new_note_or_index_if_logged_in(session)
       if logged_in?(session)
-        redirect to '/index'
+      # if a user's last note was created today, skip to index
+      # otherwise route to create note
+        if current_user(session).notes.last.created_at.to_date == Time.now.to_date
+          redirect to '/index'
+        else
+          redirect to '/notes/new'
+        end
       end
     end
 

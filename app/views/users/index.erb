@@ -1,12 +1,14 @@
 <h2>Hello <%= current_user(session).name %>!</h2>
 
+<h4 class="small-right"><a href="/notes/new">Add Note</a></h4>
+
 <br>
 
 <h4>My Notes</h4>
 <div class="note-list">
   <ul>
   <% @my_notes.each do |note| %>
-    <li> <%= note.created_at.strftime("%A, %B %d, %Y") %>: <a href="/notes/<%= note.id %>"> <%= note.content %> </a>
+    <li>  <%= note.created_at.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
   <% end %>
   </ul>
 </div>
@@ -16,7 +18,7 @@
 <div class="note-list">
   <ul>
   <% @public_notes.each do |note| %>
-    <li> <%= note.content %>
+    <li>  <%= note.created_at.strftime("%A, %B %d, %Y") %>:  <%= note.content %>
   <% end %>
   </ul>
 </div>

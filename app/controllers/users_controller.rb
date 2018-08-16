@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-
   get '/signup' do
-    redirect_to_index_if_not_logged_in(session)
+    redirect_to_new_note_or_index_if_logged_in(session)
     erb :'users/signup'
   end
 
@@ -10,6 +9,7 @@ class UsersController < ApplicationController
     @my_notes = Note.where(user_id: current_user(session).id)
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
     @tags = current_user(session).tags.collect{|tag| tag.word}.uniq
+    # idea to display top 10 or so tags
     # @top_tags = current_user(session).tags.group_by{|tag| tag.word}.map{|k,v| [do |tag|
     #   tag.word
     # end
@@ -55,16 +55,11 @@ class UsersController < ApplicationController
 
   post '/login' do
     user = User.find_by(username: params[:username])
-
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       # if a user's last note was created today, skip to index
       # otherwise route to create note
-      if user.notes.last.created_at.to_date == Time.now.to_date
-        redirect to '/index'
-      else
-        redirect to '/notes/new'
-      end
+      redirect_to_new_note_or_index_if_logged_in(session)
     else
       flash[:error] = "Username and/or password is incorrect"
       redirect to '/'
@@ -75,5 +70,4 @@ class UsersController < ApplicationController
     session.clear
     redirect to '/'
   end
-
 end

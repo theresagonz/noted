@@ -1,5 +1,8 @@
 ENV['SINATRA_ENV'] ||= "development"
 
+require 'sinatra/base'
+require 'sinatra/flash'
+
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
@@ -9,5 +12,3 @@ ActiveRecord::Base.establish_connection(
 )
 
 require_all 'app'
-
-# config.active_record.default_timezone = :local
