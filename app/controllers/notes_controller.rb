@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   get '/notes/new' do
     redirect_to_login_if_not_logged_in(session)
+    @date = Time.now.strftime("%A, %B %d, %Y")
     erb :'notes/new'
   end
   

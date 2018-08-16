@@ -34,7 +34,7 @@ class ApplicationController < Sinatra::Base
       if logged_in?(session)
       # if a user's last note was created today, skip to index
       # otherwise route to create note
-        if current_user(session).notes.last.created_at.to_date == Time.now.to_date
+        if !current_user(session).notes.empty? && current_user(session).notes.last.created_at.to_date == Time.now.to_date
           redirect to '/index'
         else
           redirect to '/notes/new'

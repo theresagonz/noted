@@ -6,6 +6,10 @@
 
 <br>
 
+<% if @note.user != current_user(session) %>
+  <h4>User: <%= @note.user.name %> </h4>
+<% end %>
+
 <h4>Tags:</h4>
 <ul>
 <% @note.tags.each do |tag| %>
