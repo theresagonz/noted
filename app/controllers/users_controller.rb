@@ -9,6 +9,9 @@ class UsersController < ApplicationController
     redirect_if_not_logged_in(session)
     @my_notes = Note.where(user_id: current_user(session).id)
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
+    @top_tags = current_user(session).tags.map do |tag|
+      tag.word
+    end
     erb :'users/index'
   end
 

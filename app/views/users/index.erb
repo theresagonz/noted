@@ -20,3 +20,14 @@
   <% end %>
   </ul>
 </div>
+
+<br>
+<h4>Your most popular tags</h4>
+<div class="tag-list">
+  <ul>
+  <% binding.pry %>
+  <% @top_tags.each do |tag| %>
+    <li><%= tag %>
+  <% end %>
+  </ul>
+</div>
