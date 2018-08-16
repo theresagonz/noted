@@ -2,7 +2,7 @@
 
 <br>
 
-<h4>Things I've Learned</h4>
+<h4>My Notes</h4>
 <div class="note-list">
   <ul>
   <% @my_notes.each do |note| %>
@@ -12,7 +12,7 @@
 </div>
 
 <br>
-<h4>Things Other People Have Learned</h4>
+<h4>Other People's Notes</h4>
 <div class="note-list">
   <ul>
   <% @public_notes.each do |note| %>
@@ -22,11 +22,10 @@
 </div>
 
 <br>
-<h4>Your most popular tags</h4>
+<h4>My tags</h4>
 <div class="tag-list">
   <ul>
-  <% binding.pry %>
-  <% @top_tags.each do |tag| %>
+  <% @tags.each do |tag| %>
     <li><%= tag %>
   <% end %>
   </ul>

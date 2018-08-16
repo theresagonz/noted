@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    redirect_if_logged_in(session)
+    redirect_to_index_if_logged_in(session)
     erb :welcome
   end
 
@@ -24,14 +24,22 @@ class ApplicationController < Sinatra::Base
       !!session[:user_id]
     end
 
-    def redirect_if_not_logged_in(session)
+    def redirect_to_login_if_not_logged_in(session)
       if !logged_in?(session)
         redirect to '/'
       end
     end
 
-    def redirect_if_logged_in(session)
+    def redirect_to_index_if_logged_in(session)
       if logged_in?(session)
+        redirect to '/index'
+      end
+    end
+
+    def redirect_to_index_if_unauthorized(session)
+      # if the note is private and the user is not the note's creator, redirect to /index
+      if @note.public == 0 && @note.user != current_user(session)
+        flash[:error] = "Hey, that's not your note"
         redirect to '/index'
       end
     end

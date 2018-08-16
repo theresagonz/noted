@@ -13,7 +13,6 @@ class NotesController < ApplicationController
 
     if new_note.save
       new_note.save
-      binding.pry
       redirect to 'index'
     else
       flash[:error] = "There was an error adding a new note. Please try again"
@@ -22,18 +21,20 @@ class NotesController < ApplicationController
   end
 
   get '/notes/new' do
-    redirect_if_not_logged_in(session)
+    redirect_to_login_if_not_logged_in(session)
     erb :'notes/new'
   end
 
   get '/notes/:id' do
-    redirect_if_not_logged_in(session)
+    redirect_to_login_if_not_logged_in(session)
     @note = Note.find_by(id: params[:id])
+    redirect_to_index_if_unauthorized(session)
     erb :'notes/show'
   end
 
   get '/notes/:id/edit' do
     @note = Note.find_by(id: params[:id])
+    redirect_to_index_if_unauthorized(session)
     @tags = []
     if !@note.tags.empty?
       @note.tags.map do |tag|

@@ -1,23 +1,24 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    redirect_if_logged_in(session)
+    redirect_to_index_if_not_logged_in(session)
     erb :'users/signup'
   end
 
   get '/index' do
-    redirect_if_not_logged_in(session)
+    redirect_to_login_if_not_logged_in(session)
     @my_notes = Note.where(user_id: current_user(session).id)
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
-    @top_tags = current_user(session).tags.map do |tag|
-      tag.word
-    end
+    @tags = current_user(session).tags.collect{|tag| tag.word}.uniq
+    # @top_tags = current_user(session).tags.group_by{|tag| tag.word}.map{|k,v| [do |tag|
+    #   tag.word
+    # end
     erb :'users/index'
   end
 
   # since I only want user to have access to own info, not using any /users routes
   get '/edit' do
-    redirect_if_not_logged_in(session)
+    redirect_to_login_if_not_logged_in(session)
     @user = current_user(session)
     erb :'users/edit'
   end
@@ -57,7 +58,13 @@ class UsersController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/notes/new'
+      # if a user's last note was created today, skip to index
+      # otherwise route to create note
+      if user.notes.last.created_at.to_date == Time.now.to_date
+        redirect to '/index'
+      else
+        redirect to '/notes/new'
+      end
     else
       flash[:error] = "Username and/or password is incorrect"
       redirect to '/'
