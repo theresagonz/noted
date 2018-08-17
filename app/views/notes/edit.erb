@@ -15,6 +15,6 @@
     <%= "checked" if @note.public == 0 %>>Private<br>
     <input type="radio" name="public" value="1" <%= 'checked' if @note.public == 1 %>>Public
     <br></br>
-    <input type="submit" class="btn btn-primary" value="Submit Edit">
+    <input type="submit" class="btn btn-primary" value="Save changes">
     <a href="/index"><button type="button" class="btn btn-secondary">Cancel</button></a>
   </form>

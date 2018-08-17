@@ -1,30 +1,30 @@
-<h2>Hello <%= current_user(session).name %>!</h2>
+<h2 class="section-fancy-font">Hello <%= current_user(session).name %>!</h2>
 
 <h4 class="small-right"><a href="/notes/new">Add Note</a></h4>
 
 <br>
 
-<h4>My Notes</h4>
+<h4 class="section-fancy-font">My Notes</h4>
 <div class="note-list">
-  <ul>
+  <ul class="list-group">
   <% @my_notes.each do |note| %>
-    <li>  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
+    <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
   <% end %>
   </ul>
 </div>
 
 <br>
-<h4>More Notes</h4>
+<h4 class="section-fancy-font">More Notes</h4>
 <div class="note-list">
-  <ul>
+  <ul class="list-group">
   <% @public_notes.each do |note| %>
-    <li>  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <%= note.content %>
+    <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <%= note.content %> by <%= note.user.name %>
   <% end %>
   </ul>
 </div>
 
 <br>
-<h4>My tags</h4>
+<h4 class="section-fancy-font">My tags</h4>
 <div class="tag-list">
   <ul>
   <% @tags.each do |tag| %>

@@ -3,23 +3,23 @@
 <br>
 
 <h4>Your Notes</h4>
-<ul>
+<ul class="list-group">
 <% @tag.notes.each do |note| %>
     <% if note.user == current_user(session)%>
-      <li><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
+      <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
     <% end %>
   <% end %>
 </ul>
 <br>
 
 <h4>More Notes</h4>
-<ul>
+<ul class="list-group">
   <% @tag.notes.each do |note| %>
     <% if note.user != current_user(session) && note.public == 1 %>
-      <li><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> by <%= note.user.name %>
+      <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> by <%= note.user.name %>
     <% end %>
   <% end %>
 </ul>
 <br>
 
-  <a href="/index">Back to main page</a>
+<a href="/index">Back to main page</a>

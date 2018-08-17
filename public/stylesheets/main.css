@@ -13,10 +13,25 @@
 
   /* --- Welcome Page Styles --- */
   body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
     background-color: lightblue;
-    color: #333;
-    font-family: Sans-Serif;
-    line-height: 18px;
+    /* display: block; */
+  }
+
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+
+  * {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .wrapper {
@@ -103,6 +118,10 @@
     padding: 0;
   }
 
+  .section-fancy-font {
+    font-family: 'Raleway', sans-serif;
+  }
+
   h1 {
     font-size: 24px;
     line-height: 36px;
@@ -111,5 +130,9 @@
   h2 {
     font-size: 18px;
     line-height: 24px;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Raleway', sans-serif;
   }
 }
