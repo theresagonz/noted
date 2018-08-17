@@ -30,6 +30,13 @@ class NotesController < ApplicationController
     # creates a new note, adds to current user
     new_note = Note.new(content: params[:content], public: params[:public])
     new_note.user = current_user(session)
+
+    # if no content submimtted, redirect to new note page with validation error
+    if !new_note.save
+      flash[:error] = new_note.errors.full_messages.uniq
+      redirect to 'notes/new'
+    end
+
     # if user submitted tags, finds or creates new tag instances
     # and associates them with the new note
     if !params[:tags].empty?
@@ -39,32 +46,29 @@ class NotesController < ApplicationController
         new_note.tags << Tag.find_or_create_by(word: tag.strip)
       end
     end
-    
-    if new_note.save
-      new_note.save
-      flash[:message] = "Note created successfully"
-      redirect to 'index'
-    else
-      flash[:error] = "There was an error adding a new note. Please try again"
-      redirect to 'notes/new'
-    end
+
+    new_note.save
+    flash[:message] = "Note created successfully"
+    redirect to 'index'
   end
   
   patch '/notes/:id' do
     note = Note.find_by(id: params[:id])
     note.content = params[:content]
     note.public = params[:public]
-    if note.save
-      note.save
-      flash[:message] = "Note edited successfully"
-      redirect to "/notes/#{note.id}"
-    else
-
+    
+    if !note.save
+      flash[:error] = note.errors.full_messages.uniq
+      redirect to "notes/#{note.id}/edit"
     end
+
+    note.save
+    flash[:message] = "Note edited successfully"
+    redirect to "/notes/#{note.id}"
   end
   
   delete '/notes/:id' do
-    note.delete(params[:id])
+    Note.delete(params[:id])
     flash[:message] = "Note deleted successfully"
     redirect to '/index'
   end
