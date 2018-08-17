@@ -7,27 +7,31 @@
 <br>
 
 <% if @note.user != current_user(session) %>
-  <h4>User: <%= @note.user.name %> </h4>
+  <h5>by <%= @note.user.name %> </h5>
+  <br>
 <% end %>
 
-<h4>Tags:</h4>
+<h5>Tags:</h5>
 <ul>
 <% @note.tags.each do |tag| %>
   <li><%= tag.word %></li>
 <% end %>
 
-</br>
-
+<% if @note.user == current_user(session) %>
+<br>
 This note is <%= @note.public == 0 ? 'private' : 'public' %>
+<br>
+<% end %>
 
 <br>
-<% if @note.user == current_user(session) %>
-  <span><a class="btn btn-dark" href="/notes/<%= @note.id %>/edit" role="button">Edit</a>
 
+<% if @note.user == current_user(session) %>
   <form action="/notes/<%= @note.id %>" method="post" onsubmit="confirm('Are you sure you want to delete this note?')">
     <input type="hidden" name="_method" value="delete">
+  <a class="btn btn-dark" href="/notes/<%= @note.id %>/edit" role="button">Edit</a>
     <input class="btn btn-danger" type="submit" value="Delete">
   </form>
-
-  </span>
+  <br>
 <% end %>
+
+<a href="/index">Back to main page</a>

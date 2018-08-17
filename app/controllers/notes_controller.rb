@@ -22,7 +22,7 @@ class NotesController < ApplicationController
         @tags << tag.word
       end
     end
-    @tags = @tags.join(" ")
+    @tags = @tags.join(", ")
     erb :'notes/edit'
   end
   

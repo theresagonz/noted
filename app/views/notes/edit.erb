@@ -9,11 +9,12 @@
     <div class="form-group">
       <textarea name="content" class="form-control" autofocus onfocus="this.value = this.value;"><%= @note.content %> </textarea>
     </div>
-    <label for="tags">Tags separated by commas (optional)</label><br>
-    <input type="text" id="tags" name="tags" value="<%= @tags %>">
-    <br></br>
+    <input type="text" id="tags" name="tags" value="<%= @tags %>" class="form-control">
+    <br>
     <input type="radio" name="public" value="0" 
     <%= "checked" if @note.public == 0 %>>Private<br>
-    <input type="radio" name="public" value="1" <%= 'checked' if @note.public == 1 %>>Public<br>
+    <input type="radio" name="public" value="1" <%= 'checked' if @note.public == 1 %>>Public
+    <br></br>
     <input type="submit" class="btn btn-primary" value="Submit Edit">
+    <a href="/index"><button type="button" class="btn btn-secondary">Cancel</button></a>
   </form>
