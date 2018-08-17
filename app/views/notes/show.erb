@@ -11,7 +11,12 @@
   <br>
 <% end %>
 
-<h5>Tags:</h5>
+<h5>Tags:
+<% if @note.tags.empty? %>
+  None
+<% end %>
+</h5>
+
 <ul>
 <% @note.tags.each do |tag| %>
   <li><%= tag.word %></li>

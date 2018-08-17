@@ -61,6 +61,26 @@ class NotesController < ApplicationController
       flash[:error] = note.errors.full_messages.uniq
       redirect to "notes/#{note.id}/edit"
     end
+  
+    # convert new tags to array
+    edited_tag_array = params[:tags].split(",")
+    old_tag_array = note.tags.collect {|tag| tag.word}
+    
+    # check to see if each old tag is in the edited tag array
+    # if not in the array, delete it
+    note.tags.each do |tag|
+      if !edited_tag_array.include?(tag.word)
+        note.tags.delete(tag)
+      end
+    end
+
+    # check to see if each edited tag is already in the tags array
+    # if not, find or create it and add to this note's tags array
+    edited_tag_array.each do |tag|
+      if !old_tag_array.include?(tag)
+        note.tags << Tag.find_or_create_by(word: tag.strip)
+      end
+    end
 
     note.save
     flash[:message] = "Note edited successfully"
