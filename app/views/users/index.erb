@@ -14,7 +14,7 @@
 </div>
 
 <br>
-<h4>Other People's Notes</h4>
+<h4>More Notes</h4>
 <div class="note-list">
   <ul>
   <% @public_notes.each do |note| %>
@@ -28,7 +28,7 @@
 <div class="tag-list">
   <ul>
   <% @tags.each do |tag| %>
-    <li><%= tag %>
+    <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
   <% end %>
   </ul>
 </div>

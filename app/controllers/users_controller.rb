@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     redirect_to_login_if_not_logged_in(session)
     @my_notes = Note.where(user_id: current_user(session).id)
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
-    @tags = current_user(session).tags.collect{|tag| tag.word}.uniq
+    @tags = current_user(session).tags.uniq
     # idea to display top 10 or so tags
     # @top_tags = current_user(session).tags.group_by{|tag| tag.word}.map{|k,v| [do |tag|
     #   tag.word

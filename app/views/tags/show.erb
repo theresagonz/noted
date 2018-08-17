@@ -1,2 +1,25 @@
-<% binding.pry %>
-<%= @tag %>
+<h2><%= @tag.word %></h2>
+
+<br>
+
+<h4>Your Notes</h4>
+<ul>
+<% @tag.notes.each do |note| %>
+    <% if note.user == current_user(session)%>
+      <li><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
+    <% end %>
+  <% end %>
+</ul>
+<br>
+
+<h4>More Notes</h4>
+<ul>
+  <% @tag.notes.each do |note| %>
+    <% if note.user != current_user(session) && note.public == 1 %>
+      <li><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> by <%= note.user.name %>
+    <% end %>
+  <% end %>
+</ul>
+<br>
+
+  <a href="/index">Back to main page</a>
