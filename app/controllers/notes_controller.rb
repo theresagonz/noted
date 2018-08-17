@@ -43,7 +43,7 @@ class NotesController < ApplicationController
       # creates array from tags string and creates new notes
       # as long as tags are comma-separated, allows user to use spaces or not
       params[:tags].split(",").each do |tag|
-        new_note.tags << Tag.find_or_create_by(word: tag.strip)
+        new_note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
       end
     end
 
@@ -78,7 +78,7 @@ class NotesController < ApplicationController
     # if not, find or create it and add to this note's tags array
     edited_tag_array.each do |tag|
       if !old_tag_array.include?(tag)
-        note.tags << Tag.find_or_create_by(word: tag.strip)
+        note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
       end
     end
 
