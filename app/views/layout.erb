@@ -21,23 +21,23 @@
     <div class="wrapper">
 
       <% if flash[:error].is_a?(Array) && !!flash[:error] %>
-      <div id="flash-error">
-        <% flash[:error].each do |error| %>
-          <%= error %><br>
-        <% end %>
-      </div>
+        <div class="alert alert-danger" role="alert">
+          <% flash[:error].each do |error| %>
+            <%= error %><br>
+          <% end %>
+        </div>
       <% end %>
 
       <% if flash[:error].is_a?(String) && !!flash[:error] %>
-      <div id="flash-error">
-        <%= flash[:error] %>
-      </div>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:error] %>
+        </div>
       <% end %>
 
       <% if !!flash[:message] %>
-      <div id="flash-message">
-        <%= flash[:message] %>
-      </div>
+        <div class="alert alert-success" role="alert">
+          <%= flash[:message] %>
+        </div>
       <% end %>
 
       <%= yield %>

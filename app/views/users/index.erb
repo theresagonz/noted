@@ -8,7 +8,7 @@
 <div class="note-list">
   <ul>
   <% @my_notes.each do |note| %>
-    <li>  <%= note.created_at.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
+    <li>  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
   <% end %>
   </ul>
 </div>
@@ -18,7 +18,7 @@
 <div class="note-list">
   <ul>
   <% @public_notes.each do |note| %>
-    <li>  <%= note.created_at.strftime("%A, %B %d, %Y") %>:  <%= note.content %>
+    <li>  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <%= note.content %>
   <% end %>
   </ul>
 </div>

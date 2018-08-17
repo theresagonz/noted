@@ -42,6 +42,7 @@ class NotesController < ApplicationController
     
     if new_note.save
       new_note.save
+      flash[:message] = "Note created successfully"
       redirect to 'index'
     else
       flash[:error] = "There was an error adding a new note. Please try again"
@@ -53,12 +54,18 @@ class NotesController < ApplicationController
     note = Note.find_by(id: params[:id])
     note.content = params[:content]
     note.public = params[:public]
-    note.save
-    redirect to "/notes/#{note.id}"
+    if note.save
+      note.save
+      flash[:message] = "Note edited successfully"
+      redirect to "/notes/#{note.id}"
+    else
+
+    end
   end
   
   delete '/notes/:id' do
     note.delete(params[:id])
+    flash[:message] = "Note deleted successfully"
     redirect to '/index'
   end
 end
