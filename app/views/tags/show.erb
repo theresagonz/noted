@@ -2,7 +2,7 @@
 
 <br>
 
-<h4>Your Notes</h4>
+<h4>My Notes</h4>
 <ul class="list-group">
 <% @tag.notes.each do |note| %>
     <% if note.user == current_user(session)%>
@@ -12,7 +12,7 @@
 </ul>
 <br>
 
-<h4>More Notes</h4>
+<h4>Other Notes</h4>
 <ul class="list-group">
   <% @tag.notes.each do |note| %>
     <% if note.user != current_user(session) && note.public == 1 %>
