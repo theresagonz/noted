@@ -13,4 +13,5 @@ class User < ActiveRecord::Base
   validates :password_confirmation,
                         presence: true,
                         allow_nil: true
+
 end

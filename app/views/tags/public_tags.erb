@@ -1,0 +1,12 @@
+<h2>All public tags</h2>
+
+<div class="tag-list">
+  <ul>
+  <% @public_tags.reverse.each do |tag| %>
+    <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
+  <% end %>
+  </ul>
+
+<br>
+
+</div><a href="/index">Back to main page</a>

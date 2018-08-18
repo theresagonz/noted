@@ -9,10 +9,10 @@ class UsersController < ApplicationController
     @my_notes = Note.where(user_id: current_user(session).id)
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
     @tags = current_user(session).tags.uniq
-    # idea to display top 10 or so tags
-    # @top_tags = current_user(session).tags.group_by{|tag| tag.word}.map{|k,v| [do |tag|
-    #   tag.word
-    # end
+    
+    @pop_tags = Note.where(public: '1').collect do |note|
+      note.tags
+    end.flatten.sort.group_by{|tag| tag.word}.sort_by{|k,v| v.size}.reverse.collect{|k,v| v[0]}
     erb :'users/index'
   end
 

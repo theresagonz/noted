@@ -15,7 +15,7 @@
 </div>
 
 <br>
-<h4>Other recent notes</h4>
+<h4>Recent notes from others</h4>
 <div class="note-list">
   <ul class="list-group">
   <% @public_notes.reverse.take(5).each do |note| %>
@@ -23,12 +23,11 @@
   <% end %>
   </ul>
 </div>
-
 <br>
 <h4>My recent tags</h4>
 <div class="tag-list">
   <ul>
-  <% @tags.take(10).reverse.each do |tag| %>
+  <% @tags.take(5).reverse.each do |tag| %>
     <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
   <% end %>
   </ul>
@@ -36,6 +35,18 @@
 </div>
 
 <br>
+
+<h4>Popular public tags</h4>
+<div class="tag-list">
+  <ul>
+  <% @pop_tags.take(5).each do |tag| %>
+    <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
+  <% end %>
+  </ul>
+</div>
+<a href="/tags/public" class="badge badge-info">View all public tags</a>
+
+<br></br>
 
 <a href="/edit">Edit Profile</a><br>
 <a href="/logout">Log Out</a><br>
