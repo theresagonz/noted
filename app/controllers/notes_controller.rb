@@ -1,4 +1,9 @@
 class NotesController < ApplicationController
+  get '/notes' do
+    @notes = Note.where(user: current_user(session))
+    erb :'notes/notes'
+  end
+
   get '/notes/new' do
     redirect_to_login_if_not_logged_in(session)
     @date = Time.now.strftime("%A, %B %d, %Y")
