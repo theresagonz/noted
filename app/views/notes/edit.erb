@@ -3,18 +3,26 @@
 <br>
 
   <form action="/notes/<%= @note.id %>" method="post">
-
     <input type="hidden" id="hidden" name="_method" value="patch">
       
     <div class="form-group">
       <textarea name="content" class="form-control" autofocus onfocus="this.value = this.value;"><%= @note.content %></textarea>
     </div>
-    <input type="text" id="tags" name="tags" value="<%= @tags %>" placeholder="Tags separated by commas (optional)" class="form-control">
+
+    <div class="form-group">
+      <input type="text" id="tags" name="tags" value="<%= @tags %>" placeholder="Tags separated with commas (optional)" class="form-control">
+    </div>
+
     <br>
-    <input type="radio" name="public" value="0" 
-    <%= "checked" if @note.public == 0 %>>Private<br>
-    <input type="radio" name="public" value="1" <%= 'checked' if @note.public == 1 %>>Public
+    
+    <div class="form-group">
+      <input type="radio" name="public" value="0" 
+      <%= "checked" if @note.public == 0 %>>Private<br>
+      <input type="radio" name="public" value="1" <%= 'checked' if @note.public == 1 %>>Public
+    </div>
+
     <br></br>
+    
     <input type="submit" class="btn btn-primary" value="Save changes">
     <a href="/index"><button type="button" class="btn btn-secondary">Cancel</button></a>
   </form>

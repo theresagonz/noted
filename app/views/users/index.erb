@@ -1,52 +1,72 @@
-<h2>Hello <%= current_user(session).name %>!</h2>
+  <h2>Hello <%= current_user(session).name %>!</h>
 
-<h4 class="small-right"><a href="/notes/new">Add note</a></h4>
-
-<br>
-
-<h4>My recent notes</h4>
-<div class="note-list">
-  <ul class="list-group">
-  <% @my_notes.reverse.take(5).each do |note| %>
-    <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
-  <% end %>
-  </ul>
-  <a href="/notes" class="badge badge-info align-right">View all my notes</a>
-</div>
-
-<br>
-<h4>Recent notes from others</h4>
-<div class="note-list">
-  <ul class="list-group">
-  <% @public_notes.reverse.take(5).each do |note| %>
-    <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <a href="/notes/<%= note.id %>"><%= note.content %></a>
-  <% end %>
-  </ul>
+  <h4><a href="/notes/new">Add note</a></h4>
 </div>
 <br>
-<h4>My recent tags</h4>
-<div class="tag-list">
-  <ul>
-  <% @tags.take(5).reverse.each do |tag| %>
-    <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
-  <% end %>
-  </ul>
-  <a href="/tags" class="badge badge-info">View all my tags</a>
+
+<div class="container">
+  <div>
+    <h4>My recent notes</h4>
+    <div class="note-list">
+      <ul class="list-group">
+      <% @my_notes.reverse.take(5).each do |note| %>
+        <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
+      <% end %>
+      </ul>
+      <a href="/notes" class="badge badge-info align-right">View all my notes</a>
+    </div>
+  </div>
 </div>
 
 <br>
 
-<h4>Popular public tags</h4>
-<div class="tag-list">
-  <ul>
-  <% @pop_tags.take(5).each do |tag| %>
-    <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
-  <% end %>
-  </ul>
+<div class="container">
+  <div>
+    <h4>Recent community notes</h4>
+    <div class="note-list">
+      <ul class="list-group">
+      <% @public_notes.reverse.take(5).each do |note| %>
+        <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <a href="/notes/<%= note.id %>"><%= note.content %></a>
+      <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
-<a href="/tags/public" class="badge badge-info">View all public tags</a>
 
-<br></br>
+<br>
 
-<a href="/edit">Edit Profile</a><br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h4>My recent tags</h4>
+      <div class="tag-list">
+        <ul>
+        <% @tags.take(5).reverse.each do |tag| %>
+          <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
+        <% end %>
+        </ul>
+        <a href="/tags" class="badge badge-info">View all my tags</a>
+      </div>
+    </div>
+    <div class="col-sm">
+      <h4>Popular public tags</h4>
+      <div class="tag-list">
+        <ul>
+        <% @pop_tags.take(5).each do |tag| %>
+          <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
+        <% end %>
+        </ul>
+      </div>
+      <a href="/tags/public" class="badge badge-info">View all public tags</a>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div>
+<a href="/edit-profile">Edit Profile</a><br>
+</div>
+<div>
 <a href="/logout">Log Out</a><br>
+</div>

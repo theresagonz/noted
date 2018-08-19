@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   get '/signup' do
     redirect_to_new_note_or_index_if_logged_in(session)
-    erb :'users/signup'
+    erb :'users/new'
   end
 
   get '/index' do
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   # since I only want user to have access to own info, not using any /users routes
-  get '/edit' do
+  get '/edit-profile' do
     redirect_to_login_if_not_logged_in(session)
     @user = current_user(session)
     erb :'users/edit'

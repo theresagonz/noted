@@ -1,29 +1,29 @@
-<div class="container">
+  <h2>Welcome to Noted</h2>
   
-  <h2>Welcome to Noted!</h2>
+  <div class="row">
+    <div class="col-sm-8">  
+      <p class="lead">A simple way to log your day.</p>
+      <p>Note a moment, a new idea, a thing learned, a ridiculous thought, or anything that makes today notable</p>
+      <img src="/images/notepadopt.jpg" alt="notepad and plants">
+    </div>
 
-  <p>We learn something new every day -- don't let it slip away. Recognize the beauty in today, kindle new ideas, and get wiser!</p>
-  
-  <div class="sidebar">
+    <div class="col-sm-4">
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="welcome-username">Username:</label><br>
+          <input type="text" id="welcome-username" name="username" class="form-control" autofocus>
+        </div>
 
-    <form action="/login" method="post">
+        <div class="form-group">
+          <label for="welcome-password">Password:</label><br>
+          <input type="password" id="welcome-password" name="password" class="form-control">
+        </div>
 
-      <div class="form-group">
-        <label for="welcome-username">Username:</label><br>
-        <input type="text" id="welcome-username" name="username" class="form-control" autofocus>
-      </div>
+        <input type="submit" class="btn btn-primary" value="Sign In">
+      </form>
 
-      <div class="form-group">
-        <label for="welcome-password">Password:</label><br>
-        <input type="password" id="welcome-password" name="password" class="form-control">
-      </div>
+      <br>
 
-      <input type="submit" class="btn btn-primary" value="Sign In">
-
-    </form>
-
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="/signup">New around here? Sign up</a>
-
+      <a href="/signup">New around here? Sign up</a>
+    </div>
   </div>
-</div>

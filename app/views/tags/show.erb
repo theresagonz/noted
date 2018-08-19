@@ -1,8 +1,8 @@
-<h2><%= @tag.word %></h2>
+<h2>#<%= @tag.word %></h2>
 
 <br>
 
-<h4>My Notes</h4>
+<h4>My notes</h4>
 <ul class="list-group">
 <% @tag.notes.each do |note| %>
     <% if note.user == current_user(session)%>
@@ -12,14 +12,14 @@
 </ul>
 <br>
 
-<h4>Other Notes</h4>
-<ul class="list-group">
+  <h4>Community notes</h4>
+  <ul class="list-group">
   <% @tag.notes.each do |note| %>
     <% if note.user != current_user(session) && note.public == 1 %>
-      <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> by <%= note.user.name %>
+      <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> &ndash; <i><%= note.user.name %></i>
     <% end %>
-  <% end %>
-</ul>
-<br>
+  </ul>
+  <br>
+<% end %>
 
 <a href="/index">Back to main page</a>
