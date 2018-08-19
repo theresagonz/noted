@@ -14,6 +14,8 @@ class TagsController < ApplicationController
 
   get '/tags/:slug' do
     @tag = Tag.find_by_slug(params[:slug])
+    @user_notes = @tag.notes.where(user: current_user(session))
+    @community_notes = @tag.notes.where("user_id != ? AND public = ?", current_user(session).id, '1')
     erb :'tags/show'
   end
 end

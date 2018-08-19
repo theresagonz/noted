@@ -2,22 +2,22 @@
 
 <br>
 
-<h4>My notes</h4>
-<ul class="list-group">
-<% @tag.notes.each do |note| %>
-    <% if note.user == current_user(session)%>
-      <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
-    <% end %>
+<% if !@user_notes.empty? %>
+  <h4>My notes</h4>
+  <ul class="list-group">
+  <% @user_notes.each do |note| %>
+    <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
   <% end %>
-</ul>
-<br>
+  </ul>
+  <br>
+<% end%>
 
+<% if !@community_notes.empty? %>
   <h4>Community notes</h4>
   <ul class="list-group">
-  <% @tag.notes.each do |note| %>
-    <% if note.user != current_user(session) && note.public == 1 %>
-      <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> &ndash; <i><%= note.user.name %></i>
-    <% end %>
+  <% @community_notes.each do |note| %>
+    <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> &ndash; <i><%= note.user.name %></i>
+  <% end %>
   </ul>
   <br>
 <% end %>
