@@ -26,7 +26,7 @@
     <div class="note-list">
       <ul class="list-group">
       <% @public_notes.reverse.take(5).each do |note| %>
-        <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <a href="/notes/<%= note.id %>"><%= note.content %></a>
+        <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:  <a href="/notes/<%= note.id %>"><%= note.content %></a> &ndash; <i><%= note.user.name %></i>
       <% end %>
       </ul>
     </div>
