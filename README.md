@@ -1,4 +1,4 @@
-#Noted: A simple way to log your day.
+# Noted: A simple way to log your day.
 
 ## About
 I built this Sinatra project in fulfillment of a Flatiron School online web developer program requirement.
