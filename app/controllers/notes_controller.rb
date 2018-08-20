@@ -51,9 +51,9 @@ class NotesController < ApplicationController
         new_note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
       end
     end
-
+    
     new_note.save
-    flash[:message] = "Note created successfully"
+    flash[:message] = "Thanks for adding a note!"
     redirect to 'index'
   end
   

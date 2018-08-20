@@ -15,15 +15,15 @@
   </div>
   
   <div class="col-sm-3 sidebar">
-    <h5>Tags:
-    <% if @note.tags.empty? %>
-      None
-    <% end %>
-    </h5>
+    <h5>Tags:</h5>
     <ul>
+    <% if @note.tags.empty? %>
+      <li>None
+    <% end %>
     <% @note.tags.each do |tag| %>
       <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a></li>
     <% end %>
+    </ul>
   </div>
 </div>
 

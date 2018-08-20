@@ -41,7 +41,7 @@
       <h4>My recent tags</h4>
       <div class="tag-list">
         <ul>
-        <% @tags.take(5).reverse.each do |tag| %>
+        <% @tags.reverse.take(5).each do |tag| %>
           <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
         <% end %>
         </ul>
