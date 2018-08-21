@@ -17,13 +17,14 @@ class UsersController < ApplicationController
   end
 
   # since I only want user to have access to own info, not using any /users routes
-  get '/edit-profile' do
+  get "/users/:username/edit" do
     redirect_to_login_if_not_logged_in(session)
+    redirect_to_index_if_unauthorized_to_edit_user(session)
     @user = current_user(session)
     erb :'users/edit'
   end
 
-  patch '/edit' do
+  patch '/users/:id' do
     user = current_user(session)
     user.name = params[:name]
     user.username = params[:username]
@@ -37,15 +38,11 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/signup' do
+  post '/users' do
     new_user = User.new(params)
-    # if signup info is valid
     if new_user.save
-      # save new user to db
       new_user.save
-      # save user's info in session
       session[:user_id] = new_user.id
-      # redirect to user's home page
       redirect to '/notes/new'
     else
       flash[:error] = new_user.errors.full_messages.uniq

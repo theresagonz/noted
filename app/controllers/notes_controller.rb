@@ -20,7 +20,7 @@ class NotesController < ApplicationController
   get '/notes/:id/edit' do
     redirect_to_login_if_not_logged_in(session)
     @note = Note.find_by(id: params[:id])
-    redirect_to_index_if_unauthorized_to_edit(session)
+    redirect_to_index_if_unauthorized_to_edit_note(session)
     @tags = []
     if !@note.tags.empty?
       @note.tags.map do |tag|

@@ -45,7 +45,7 @@
           <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
         <% end %>
         </ul>
-        <a href="/tags" class="badge badge-info">View all my tags</a>
+        <a href="/my-tags" class="badge badge-info">View all my tags</a>
       </div>
     </div>
     <div class="col-sm">
@@ -57,7 +57,7 @@
         <% end %>
         </ul>
       </div>
-      <a href="/tags/public" class="badge badge-info">View all public tags</a>
+      <a href="/public-tags" class="badge badge-info">View all public tags</a>
     </div>
   </div>
 </div>
@@ -65,7 +65,7 @@
 <br>
 <div class="container">
   <div>
-<a href="/edit-profile">Edit Profile</a><br>
+<a href="/users/<%= current_user(session).username.downcase %>/edit">Edit Profile</a><br>
 </div>
 <div>
 <a href="/logout">Log Out</a><br>

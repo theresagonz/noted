@@ -1,11 +1,11 @@
 class TagsController < ApplicationController
 
-  get '/tags' do
+  get '/my-tags' do
     @tags = current_user(session).tags.uniq
     erb :'tags/tags'
   end
 
-  get '/tags/public' do
+  get '/public-tags' do
     @public_tags = Note.where(public: '1').collect do |note|
       note.tags
     end.flatten.sort.group_by{|tag| tag.word}.sort_by{|k,v| v.size}.reverse.collect{|k,v| v[0]}
