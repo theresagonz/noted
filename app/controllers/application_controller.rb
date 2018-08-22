@@ -1,5 +1,3 @@
-require './config/environment'
-
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -60,7 +58,7 @@ class ApplicationController < Sinatra::Base
 
     def redirect_to_index_if_unauthorized_to_edit_user(session)
       # if current user is not the profile owner, redirect to /index
-      if params[:id] != session[:user_id]
+      if params[:username] != current_user(session).username.downcase
         flash[:error] = "Hey, that's not your profile"
         redirect to '/index'
       end

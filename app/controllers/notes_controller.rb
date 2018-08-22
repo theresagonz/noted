@@ -32,7 +32,6 @@ class NotesController < ApplicationController
   end
   
   post '/notes' do
-    # creates a new note, adds to current user
     new_note = Note.new(content: params[:content], public: params[:public])
     new_note.user = current_user(session)
 
@@ -58,41 +57,44 @@ class NotesController < ApplicationController
   end
   
   patch '/notes/:id' do
-    old_note = Note.find_by(id: params[:id])
-    old_note.content = params[:content]
-    old_note.public = params[:public]
+    @note = Note.find_by(id: params[:id])
+    redirect_to_index_if_unauthorized_to_edit_note(session)
+    @note.content = params[:content]
+    @note.public = params[:public]
     
-    if !old_note.save
-      flash[:error] = old_note.errors.full_messages.uniq
-      redirect to "notes/#{old_note.id}/edit"
+    if !@note.save
+      flash[:error] = @note.errors.full_messages.uniq
+      redirect to "notes/#{@note.id}/edit"
     end
   
     # convert new tags to array
     edited_tags_array = params[:tags].split(",")
-    old_tags_array = old_note.tags.collect {|tag| tag.word}
+    old_tags_array = @note.tags.collect {|tag| tag.word}
     
     # check to see if each old tag is in the edited tag array
     # if not in the array, delete it
-    old_note.tags.each do |tag|
+    @note.tags.each do |tag|
       if !edited_tags_array.include?(tag.word)
-        old_note.tags.delete(tag)
+        @note.tags.delete(tag)
       end
     end
 
     # check to see if each edited tag is already in the tags array
-    # if not, find or create it and add to this old_note's tags array
+    # if not, find or create it and add to this note's tags array
     edited_tags_array.each do |tag|
       if !old_tags_array.include?(tag)
-        old_note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
+        @note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
       end
     end
 
-    old_note.save
+    @note.save
     flash[:message] = "Note edited successfully"
-    redirect to "/notes/#{old_note.id}"
+    redirect to "/notes/#{@note.id}"
   end
   
   delete '/notes/:id' do
+    @note = Note.find_by(id: params[:id])
+    redirect_to_index_if_unauthorized_to_edit_note(session)
     Note.delete(params[:id])
     flash[:message] = "Note deleted successfully"
     redirect to '/index'
