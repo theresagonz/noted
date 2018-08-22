@@ -58,38 +58,38 @@ class NotesController < ApplicationController
   end
   
   patch '/notes/:id' do
-    note = Note.find_by(id: params[:id])
-    note.content = params[:content]
-    note.public = params[:public]
+    old_note = Note.find_by(id: params[:id])
+    old_note.content = params[:content]
+    old_note.public = params[:public]
     
-    if !note.save
-      flash[:error] = note.errors.full_messages.uniq
-      redirect to "notes/#{note.id}/edit"
+    if !old_note.save
+      flash[:error] = old_note.errors.full_messages.uniq
+      redirect to "notes/#{old_note.id}/edit"
     end
   
     # convert new tags to array
-    edited_tag_array = params[:tags].split(",")
-    old_tag_array = note.tags.collect {|tag| tag.word}
+    edited_tags_array = params[:tags].split(",")
+    old_tags_array = old_note.tags.collect {|tag| tag.word}
     
     # check to see if each old tag is in the edited tag array
     # if not in the array, delete it
-    note.tags.each do |tag|
-      if !edited_tag_array.include?(tag.word)
-        note.tags.delete(tag)
+    old_note.tags.each do |tag|
+      if !edited_tags_array.include?(tag.word)
+        old_note.tags.delete(tag)
       end
     end
 
     # check to see if each edited tag is already in the tags array
-    # if not, find or create it and add to this note's tags array
-    edited_tag_array.each do |tag|
-      if !old_tag_array.include?(tag)
-        note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
+    # if not, find or create it and add to this old_note's tags array
+    edited_tags_array.each do |tag|
+      if !old_tags_array.include?(tag)
+        old_note.tags << Tag.find_or_create_by(word: tag.downcase.strip)
       end
     end
 
-    note.save
+    old_note.save
     flash[:message] = "Note edited successfully"
-    redirect to "/notes/#{note.id}"
+    redirect to "/notes/#{old_note.id}"
   end
   
   delete '/notes/:id' do

@@ -2,7 +2,7 @@
 
 <div class="tag-list">
   <ul>
-  <% @public_tags.reverse.each do |tag| %>
+  <% @public_tags.each do |tag| %>
     <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
   <% end %>
   </ul>

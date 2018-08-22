@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
     @tags = current_user(session).tags.uniq
     
-    @pop_tags = Note.where(public: '1').collect do |note|
+    @popular_public_tags = Note.where(public: '1').collect do |note|
       note.tags
     end.flatten.sort.group_by{|tag| tag.word}.sort_by{|k,v| v.size}.reverse.collect{|k,v| v[0]}
     erb :'users/index'

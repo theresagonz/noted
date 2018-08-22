@@ -52,7 +52,7 @@
       <h4>Popular public tags</h4>
       <div class="tag-list">
         <ul>
-        <% @pop_tags.take(5).each do |tag| %>
+        <% @popular_public_tags.take(5).each do |tag| %>
           <li><a href="/tags/<%= tag.slug %>"><%= tag.word %></a>
         <% end %>
         </ul>
