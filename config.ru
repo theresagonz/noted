@@ -8,4 +8,6 @@ use Rack::MethodOverride
 use UsersController
 use NotesController
 use TagsController
-run ApplicationController
+# require ApplicationController
+
+run Sinatra::Application
