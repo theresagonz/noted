@@ -1,0 +1,37 @@
+<div class="notes-title">Community Notes</div>
+
+<div class="row">
+  <div class="col-sm-9">
+    <div class="note-list">
+      <ul class="list-group">
+        <% @public_notes.reverse.each do |note| %>
+          <li class="list-group-item" style="line-height: 0.6">
+          <h6><a href="/notes/<%= note.id %>"><%= note.content %></a><br></h6>
+            <small class="grey"><%= note.created_at.localtime.strftime("%A %-m/%d/%y") %> &bull; <%= note.user ? note.user.name : nil %></small>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-sm-3 sidenav">
+    <h4>Community tags</h4>
+    <div class="tag-list">
+      <ul>
+        <% @popular_public_tags.each do |tag| %>
+          <li><a href="/tags/<%= tag.slug %>">#<%= tag.word %></a>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<% if logged_in?(session) %>
+  <h5 class="notes-link"><a href="/notes/my-notes">My Notes</a></h5>
+  <br>
+  <a href="/edit-profile">Edit profile (<%= current_user(session).name %>)</a><br>
+  <a href="/logout">Log out</a><br>
+<% else %>
+<br>
+<h6>To see more, please <a href="/">log in</a> or <a href="/signup">sign up</a></h6>
+<% end %>
+

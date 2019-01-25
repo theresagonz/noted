@@ -1,4 +1,4 @@
-<h2>Hello <%= current_user(session).name %>!</h2>
+<h2 class="top-margin">Hello <%= current_user(session).name %>!</h2>
 <h5>It's <%= @date %></h5>
 
 <br>
@@ -6,15 +6,21 @@
 <div class="note-input">
   <form action="/notes" method="post">
     <div class="form-group">
-      <textarea name="content" class="form-control" placeholder="Make a note about today" autofocus></textarea>
+      <% if !!flash[:message] && flash[:message] == "Thanks for making a note!" %>
+        <textarea name="content" class="form-control" placeholder="Make another note about today" autofocus></textarea>
+      <% else %>
+        <textarea name="content" class="form-control" placeholder="Make a note about today" autofocus></textarea>
+      <% end %>
     </div>
     <div class="form-group">
       <input type="text" name="tags" placeholder="Tags separated with commas (optional)" class="form-control"><br>
       <input type="radio" name="public" value="0" <%= "checked" %>> Private<br>
       <input type="radio" name="public" value="1"> Public<br></br>
-      <input type="submit" class="btn btn-primary" value="Submit">
+      <input type="submit" class="btn btn-primary" value="Add note">
+      <a href='/notes/my-notes' class="btn btn-outline-secondary">Don't add note</a>
     </div>
   </form>
 </div>
-
-<a href="/index" class="small-right-link">Skip for now</a>
+<br>
+<h5><a href="/notes/my-notes" class="small-right-link">My Notes</h5></a>
+<h5><a href="/notes/community-notes" class="small-right-link">Community Notes</h5></a>

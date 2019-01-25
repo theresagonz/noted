@@ -4,19 +4,7 @@
 </div>
 <br>
 
-<div class="container">
-  <div>
-    <h4>My recent notes</h4>
-    <div class="note-list">
-      <ul class="list-group">
-      <% @my_notes.reverse.take(5).each do |note| %>
-        <li class="list-group-item">  <%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
-      <% end %>
-      </ul>
-      <a href="/notes" class="badge badge-info align-right">View all my notes</a>
-    </div>
-  </div>
-</div>
+
 
 <br>
 
@@ -65,7 +53,7 @@
 <br>
 <div class="container">
   <div>
-<a href="/users/<%= current_user(session).username.downcase %>/edit">Edit Profile</a><br>
+<a href="/edit-profile">Edit Profile</a><br>
 </div>
 <div>
 <a href="/logout">Log Out</a><br>

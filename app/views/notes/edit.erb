@@ -16,13 +16,12 @@
     <br>
     
     <div class="form-group">
-      <input type="radio" name="public" value="0" 
-      <%= "checked" if @note.public == 0 %>>Private<br>
-      <input type="radio" name="public" value="1" <%= 'checked' if @note.public == 1 %>>Public
+      <input type="radio" name="public" value="0" <%= "checked" if @note.public == 0 %> >Private<br>
+      <input type="radio" name="public" value="1" <%= "checked" if @note.public == 1 %> >Public</input>
     </div>
 
     <br></br>
     
     <input type="submit" class="btn btn-primary" value="Save changes">
-    <a href="/index"><button type="button" class="btn btn-secondary">Cancel</button></a>
+    <a href="/notes/my-notes"><button type="button" class="btn btn-secondary">Cancel</button></a>
   </form>

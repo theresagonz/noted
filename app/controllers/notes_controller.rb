@@ -9,6 +9,25 @@ class NotesController < ApplicationController
     @date = Time.now.strftime("%A, %B %d, %Y")
     erb :'notes/new'
   end
+
+  get '/notes/my-notes' do
+    redirect_to_login_if_not_logged_in(session)
+    @notes = Note.where(user: current_user(session))
+    @tags = current_user(session).tags.uniq
+    erb :'notes/my-notes'
+  end
+
+  get '/notes/community-notes' do
+    if current_user(session)
+      @public_notes = Note.where("user_id != ? AND public = ?", current_user(session).id, '1')
+      @popular_public_tags = Note.where(public: '1').collect{|note| note.tags}.flatten.group_by{|tag| tag.word}.sort_by{|k,v| v.size}.reverse.collect{|k,v| v[0]}
+    else
+      @public_notes = Note.where("public = ?", '1').reverse.take(6).reverse
+      @popular_public_tags = Note.where(public: '1').collect{|note| note.tags}.flatten.group_by{|tag| tag.word}.sort_by{|k,v| v.size}.reverse.collect{|k,v| v[0]}.take(10)
+    end
+
+    erb :'notes/community-notes'
+  end
   
   get '/notes/:id' do
     redirect_to_login_if_not_logged_in(session)
@@ -52,8 +71,8 @@ class NotesController < ApplicationController
     end
     
     new_note.save
-    flash[:message] = "Thanks for adding a note!"
-    redirect to 'index'
+    flash[:message] = "Thanks for making a note!"
+    redirect to 'notes/new'
   end
   
   patch '/notes/:id' do
@@ -75,7 +94,7 @@ class NotesController < ApplicationController
     # if not in the array, delete it
     @note.tags.each do |tag|
       if !edited_tags_array.include?(tag.word)
-        @note.tags.delete(tag)
+        @note.tags.destroy(tag)
       end
     end
 
@@ -95,8 +114,8 @@ class NotesController < ApplicationController
   delete '/notes/:id' do
     @note = Note.find_by(id: params[:id])
     redirect_to_index_if_unauthorized_to_edit_note(session)
-    Note.delete(params[:id])
+    Note.destroy(params[:id])
     flash[:message] = "Note deleted successfully"
-    redirect to '/index'
+    redirect to '/'
   end
 end

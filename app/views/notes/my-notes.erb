@@ -1,0 +1,40 @@
+<div class="notes-title">My Notes<span class="btn-container">
+    <a href="/notes/new" class="btn btn-info new-note-button float-right">Add note</button></a>
+  </span>
+</div>
+<div class="row notes-container">
+  <div class="col-sm-8">
+  <a href="/notes/new">
+    <div class="note-list">
+      <ul class="list-group">
+      <% @notes.reverse.each do |note| %>
+        <li class="list-group-item" style="line-height: 0.6">
+          <h6><a href="/notes/<%= note.id %>"><%= note.content %></a><br></h6>
+          <small class="grey"><%= note.created_at.localtime.strftime("%A %-m/%d/%y") %></small>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+
+<div class="col-sm-4 sidenav">
+    <div class="tag-list">
+      <h5>Recent tags</h5>
+      <ul>
+        <% if current_user(session).tags.empty? %>
+          <li>None
+        <% else %>
+        <% @tags.reverse.each do |tag| %>
+          <li><a href="/tags/<%= tag.slug %>">#<%= tag.word %></a>
+        <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<%# <br> %>
+<h5 class="notes-link"><a href="/notes/community-notes">Community Notes</a></h5>
+
+<br>
+
+<a href="/edit-profile">Edit profile (<%= current_user(session).name %>)</a><br>
+<a href="/logout">Log out</a><br>

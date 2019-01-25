@@ -1,4 +1,5 @@
 @media screen {
+
   /* --- Reset Styles --- */
   * {
     list-style: none;
@@ -6,7 +7,8 @@
     padding: 0;
   }
 
-  html, body {
+  html,
+  body {
     height: 100%;
     width: 100%;
   }
@@ -23,7 +25,9 @@
     /* display: block; */
   }
 
-  *, ::after, ::before {
+  *,
+  ::after,
+  ::before {
     box-sizing: border-box;
   }
 
@@ -35,25 +39,43 @@
 
   .wrapper {
     background: #fff;
-    -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
-    box-shadow: 0 0 10px rgba(0,0,0,.3);
-    margin: 16px auto;
+    -webkit-box-shadow: -2px 10px 61px -10px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -2px 10px 61px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px 10px 61px -10px rgba(0, 0, 0, 0.75);
+    margin: 50px auto;
     max-width: 960px;
-    padding: 2.25%; /* 18px / 800px */
+    padding: 20px;
+    /* 18px / 800px */
     width: 85%;
+    border-radius: 15px;
+  }
+
+  .top-margin {
+    margin: 15px 0 5px 0;
+  }
+
+  .notes-container {
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .note-list {
+    margin: 0;
+  }
+
+  .notes-link {
+    margin: 30px 0 0 0;
+  }
+
+  .notes-title {
+    border-bottom: 1.5px solid #ccc;
+    font-size: 35px;
+    margin: 12px 0 20px 0;
   }
 
   h1 {
     font-size: 36px;
     line-height: 54px;
-  }
-
-  h2 {
-    border-bottom: 2px solid #ccc;
-    font-size: 24px;
-    line-height: 36px;
-    margin-bottom: 16px;
   }
 
   h3 {
@@ -71,15 +93,18 @@
 
   .content {
     float: left;
-    width: 60%; /* 480px / 800px */
+    /* width: 60%; */
+    /* 480px / 800px */
   }
 
-  .sidebar {
+  .sidenav {
     background: #eee;
     border: 1px solid #ccc;
     float: right;
-    padding: 2.08333333333%; /* 5px / 240px */
-    width: 30%; /* 240px / 800px */
+    padding: 15px 18px 0 18px;
+    /* margin: 0 15px; */
+    border-radius: 5px;
+    min-width: 180px;
   }
 
   .sidebar ul {
@@ -90,10 +115,23 @@
     clear: both;
   }
 
+  .grey {
+    color: grey;
+  }
+
   footer.branding {
-    border-top: 2px solid #ccc;
+    border-top: 1.5px solid #ccc;
     margin-top: 20px;
     padding-top: 20px;
+  }
+
+  .btn-container {
+    margin: 0 0 7px 0;
+    color: red;
+  }
+
+  .row {
+    margin-right: 0;
   }
 }
 
@@ -103,9 +141,12 @@
     -webkit-box-shadow: none;
     box-shadow: none;
     width: auto;
+    margin: 0;
+    border-radius: 0;
   }
 
-  .content, .sidebar {
+  .content,
+  .sidebar {
     float: none;
     width: 100%;
   }
@@ -130,10 +171,9 @@
   h2 {
     font-size: 18px;
     line-height: 24px;
-    font-family: "Indie Flower", cursive;
   }
 
-  h1, h2, h3, h4, h5 {
-    font-family: 'Muli', sans-serif;
+  .note-list {
+    width: 100%
   }
 }

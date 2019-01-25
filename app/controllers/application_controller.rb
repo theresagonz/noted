@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    redirect_to_new_note_or_index_if_logged_in(session)
+    redirect_to_new_note_if_logged_in(session)
     erb :welcome
   end
 
@@ -24,19 +24,16 @@ class ApplicationController < Sinatra::Base
 
     def redirect_to_login_if_not_logged_in(session)
       if !logged_in?(session)
+        flash[:error] = "Please log in or sign up"
         redirect to '/'
       end
     end
 
-    def redirect_to_new_note_or_index_if_logged_in(session)
+    def redirect_to_new_note_if_logged_in(session)
       if logged_in?(session)
       # if a user's last note was created today, skip to index
       # otherwise route to create note
-        if !current_user(session).notes.empty? && current_user(session).notes.last.created_at.localtime.to_date == Time.now.to_date
-          redirect to '/index'
-        else
-          redirect to '/notes/new'
-        end
+        redirect to '/notes/new'
       end
     end
 
@@ -44,7 +41,7 @@ class ApplicationController < Sinatra::Base
       # if the note is private and the user is not the note's creator, redirect to /index
       if @note.public == 0 && @note.user != current_user(session)
         flash[:error] = "Hey, that's not your note"
-        redirect to '/index'
+        redirect to '/notes/my-notes'
       end
     end
 
@@ -52,15 +49,15 @@ class ApplicationController < Sinatra::Base
       # if the current user is not the note's the note's creator, redirect to /index
       if @note.user != current_user(session)
         flash[:error] = "Hey, that's not your note"
-        redirect to '/index'
+        redirect to '/notes/my-notes'
       end
     end
 
     def redirect_to_index_if_unauthorized_to_edit_user(session)
       # if current user is not the profile owner, redirect to /index
-      if params[:username] != current_user(session).username.downcase
+      if @user != current_user(session)
         flash[:error] = "Hey, that's not your profile"
-        redirect to '/index'
+        redirect to '/notes/my-notes'
       end
     end
   end

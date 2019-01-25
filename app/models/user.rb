@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :notes
-  has_many :tags, through: :notes
+  has_many :notes, dependent: :destroy
+  has_many :tags, through: :notes, dependent: :destroy
   has_secure_password
 
   validates :name,      presence: true
