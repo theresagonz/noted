@@ -1,10 +1,10 @@
-# Noted: A simple way to log your day.
+# Noted: A simple, flexible way to log your day.
 
 ## About
-I built this Sinatra project in fulfillment of a Flatiron School online web developer program requirement.
+# Noted: A simple, flexible way to log your day
+Log a memorable moment, a new idea, something learned, a ridiculous thought, or anything else that makes today notable.
 
-Use Noted to log a memorable moment, a new idea, a thing learned, a ridiculous thought, or anything that makes today notable.
-
+Organize your notes with tags and choose to keep private or share with the community.
 
 ### Installation
 To use this app:
