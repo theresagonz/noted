@@ -1,13 +1,13 @@
-<h2 class="notes-title">#<%= @tag.word %></h2>
+<h2>#<%= @tag.word %></h2>
+
+<br>
 
 <% if !@user_notes.empty? %>
   <h4>My notes</h4>
   <ul class="list-group">
-    <% @user_notes.each do |note| %>
-      <li class="list-group-item" style="line-height: 0.6">
-        <h6><a href="/notes/<%= note.id %>"><%= note.content %></a></h6><br>
-        <small class="grey"><%= note.created_at.localtime.strftime("%A %-m/%d/%y") %></small>
-    <% end %>
+  <% @user_notes.each do |note| %>
+    <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a>
+  <% end %>
   </ul>
   <br>
 <% end%>
@@ -15,17 +15,11 @@
 <% if !@community_notes.empty? %>
   <h4>Community notes</h4>
   <ul class="list-group">
-    <% @community_notes.each do |note| %>
-    <li class="list-group-item" style="line-height: 0.6">
-      <h6><a href="/notes/<%= note.id %>"><%= note.content %></a><br></h6>
-        <small class="grey"><%= note.created_at.localtime.strftime("%A %-m/%d/%y") %></small><i> <%= note.user.name %></i>
-    <% end %>
+  <% @community_notes.each do |note| %>
+    <li class="list-group-item"><%= note.created_at.localtime.strftime("%A, %B %d, %Y") %>:   <a href="/notes/<%= note.id %>"><%= note.content %></a> &ndash; <i><%= note.user.name %></i>
+  <% end %>
   </ul>
   <br>
 <% end %>
 
-<h5><a href="/notes/my-notes">My Notes</a></h5>
-<h5><a href="/notes/community-notes">Community Notes</a></h5>
-<br>
-<a href="/edit-profile">Edit profile (<%= current_user(session).name %>)</a><br>
-<a href="/logout">Log out</a>
+<a href="/index">Back to main page</a>

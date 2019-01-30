@@ -2,31 +2,21 @@
 
 <br>
 
-<form action="/users/<%= @user.id %>" method="post">
+<form action="/users/<%= current_user(session).username.downcase %>" method="post">
   <input type="hidden" id="hidden" name="_method" value="patch">
     
-  <div class="form-group">
-    <label for="signup-name">Display name:</label><br>
-    <input type="text" id="signup_name" name="name" value="<%= @user.name %>" class="form-control">
-  </div>
+    <div class="form-group">
+      <label for="signup-name">Display name:</label><br>
+      <input type="text" id="signup_name" name="name" value="<%= @user.name %>" class="form-control">
+    </div>
 
-  <div class="form-group">
-    <label for="signup_username">Username:</label>
-    <input type="username" id="signup_username" name="username" value="<%= @user.username %>" class="form-control">
-  </div>
+    <div class="form-group">
+      <label for="signup_username">Username:</label>
+      <input type="username" id="signup_username" name="username" value="<%= @user.username %>" class="form-control">
+    </div>
 
-  <div>
-    <input type="submit" class="btn btn-primary" value="Save changes">
-    <a href="/notes/my-notes"><button type="button" class="btn btn-secondary">Cancel</button></a>
-  </div>
-
-  <br>
+    <div>
+      <input type="submit" class="btn btn-primary" value="Save changes">
+      <a href="/index"><button type="button" class="btn btn-secondary">Cancel</button></a>
+    </div>
 </form>
-
-
-<form action="/users/<%= @user.id %>" method="post" onsubmit="return confirm('Are you sure you want to delete your account and lose all your notes? This action cannot be undone')">
-  <input type="hidden" name="_method" value="delete">
-  <input class="btn btn-outline-danger" type="submit" value="Delete account">
-</form>
-
-
