@@ -1,7 +1,6 @@
 # Noted: A simple, flexible way to log your day.
 
 ## About
-# Noted: A simple, flexible way to log your day
 Log a memorable moment, a new idea, something learned, a ridiculous thought, or anything else that makes today notable.
 
 Organize your notes with tags and choose to keep private or share with the community.
